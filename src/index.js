@@ -57,7 +57,7 @@ import Transfer from './components/transfer';
 import Tree from './components/tree';
 import Upload from './components/upload';
 import {Row, Col} from './components/grid';
-// import {Select, Option, OptionGroup} from './components/select';
+import {Select, Option, OptionGroup} from './components/select';
 import locale from './locale/index';
 
 // mandao extend
@@ -69,7 +69,8 @@ import ShrinkableMenu from './md-extend/components/shrinkable-menu/sidebar.vue';
 import Toolbar from './md-extend/components/toolbar';
 import MdPrint from './md-extend/components/print';
 import Icon from './md-extend/components/icon';
-import {Select, Option, OptionGroup} from './md-extend/components/select';
+import CanEditTable from './md-extend/components/table/can-edit';
+import CanEditTableV2 from './md-extend/components/table/v2/can-edit-v2';
 
 const components = {
     Affix,
@@ -158,12 +159,11 @@ const componentsMandao = {
     ShrinkableMenu,
     Toolbar,
     Can,
+    CanEditTable,
+    CanEditTableV2,
     Btn: Button,
     BtnGroup: Button.Group,
     Icon,
-    // Option: Option,
-    // OptionGroup,
-    // Select,
 };
 
 const iview = {
@@ -183,7 +183,7 @@ const iview = {
     iSelect: Select,
     iSwitch: Switch,
     iTable: Table,
-    iTime: Time
+    iTime: Time,
 };
 
 const install = function(Vue, opts = {}) {

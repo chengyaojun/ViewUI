@@ -762,7 +762,14 @@
 
                 if (value === '') this.values = [];
                 else if (checkValuesNotEqual(value,publicValue,values)) {
-                    this.$nextTick(() => this.values = getInitialValue().map(getOptionData).filter(Boolean));
+                    // 修复option改为md-option是下拉无法选中的问题
+                    this.$nextTick(() => {
+                        let filterValue = getInitialValue().map(getOptionData).filter(Boolean);
+                        if (filterValue.length>0) {
+                            this.values = filterValue;
+                        }
+                    });
+                    // this.$nextTick(() => this.values = getInitialValue().map(getOptionData).filter(Boolean));
                     if (!this.multiple) this.dispatch('FormItem', 'on-form-change', this.publicValue);
                 }
             },
