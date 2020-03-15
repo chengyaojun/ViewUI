@@ -3,6 +3,7 @@ const cleanCSS = require('gulp-clean-css');
 const less = require('gulp-less');
 const rename = require('gulp-rename');
 const autoprefixer = require('gulp-autoprefixer');
+const pkg = require('../package.json');
 
 // 编译less
 gulp.task('css', function () {
@@ -12,7 +13,7 @@ gulp.task('css', function () {
             browsers: ['last 2 versions', 'ie > 8']
         }))
         .pipe(cleanCSS())
-        .pipe(rename('iview.css'))
+        .pipe(rename(`${pkg.buildName}.css`))
         .pipe(gulp.dest('../dist/styles'));
 });
 

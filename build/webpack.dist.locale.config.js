@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const entry = require('./locale');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const pkg = require('../package.json');
 
 process.env.NODE_ENV = 'production';
 
@@ -24,7 +25,8 @@ module.exports = {
         path: path.resolve(__dirname, '../dist/locale'),
         publicPath: '/dist/locale/',
         filename: '[name].js',
-        library: 'iview/locale',
+        library: `${pkg.buildName}/locale`,
+        // library: 'iview/locale',
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
@@ -39,7 +41,7 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"production"'
+                NODE_ENV: '"production"',
             }
         }),
         new UglifyJsPlugin({

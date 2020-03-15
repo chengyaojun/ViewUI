@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.base.config.js');
 const CompressionPlugin = require('compression-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const pkg = require('../package.json');
 
 process.env.NODE_ENV = 'production';
 
@@ -15,8 +16,10 @@ module.exports = merge(webpackBaseConfig, {
     output: {
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/dist/',
-        filename: 'iview.min.js',
-        library: 'iview',
+        filename: `${pkg.buildName}.js`,//'iview.js',
+        library: pkg.buildName,//'iview',
+        // filename: 'iview.min.js',
+        // library: 'iview',
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
@@ -31,7 +34,7 @@ module.exports = merge(webpackBaseConfig, {
     plugins: [
         // @todo
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': '"production"'
+            'process.env.NODE_ENV': '"production"',
         }),
         new UglifyJsPlugin({
             parallel: true,

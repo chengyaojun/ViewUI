@@ -24,7 +24,7 @@ import Dropdown from './components/dropdown';
 import Footer from './components/footer';
 import Form from './components/form';
 import Header from './components/header';
-import Icon from './components/icon';
+// import Icon from './components/icon';
 import Input from './components/input';
 import InputNumber from './components/input-number';
 import Scroll from './components/scroll';
@@ -57,8 +57,19 @@ import Transfer from './components/transfer';
 import Tree from './components/tree';
 import Upload from './components/upload';
 import {Row, Col} from './components/grid';
-import {Select, Option, OptionGroup} from './components/select';
+// import {Select, Option, OptionGroup} from './components/select';
 import locale from './locale/index';
+
+// mandao extend
+// import Loading from './md-extend/components/md-loading';
+import loadCss from './md-extend/libs/loadCss';
+import Can from './md-extend/components/can';
+import directives from './md-extend/directives';
+import ShrinkableMenu from './md-extend/components/shrinkable-menu/sidebar.vue';
+import Toolbar from './md-extend/components/toolbar';
+import MdPrint from './md-extend/components/print';
+import Icon from './md-extend/components/icon';
+import {Select, Option, OptionGroup} from './md-extend/components/select';
 
 const components = {
     Affix,
@@ -95,7 +106,7 @@ const components = {
     Form,
     FormItem: Form.Item,
     Header: Header,
-    Icon,
+    // Icon,
     Input,
     InputNumber,
     Scroll,
@@ -142,8 +153,22 @@ const components = {
     Upload
 };
 
+const componentsMandao = {
+    // Loading,
+    ShrinkableMenu,
+    Toolbar,
+    Can,
+    Btn: Button,
+    BtnGroup: Button.Group,
+    Icon,
+    // Option: Option,
+    // OptionGroup,
+    // Select,
+};
+
 const iview = {
     ...components,
+    ...componentsMandao,
     iButton: Button,
     iCircle: Circle,
     iCol: Col,
@@ -166,11 +191,17 @@ const install = function(Vue, opts = {}) {
     locale.use(opts.locale);
     locale.i18n(opts.i18n);
 
+    const prefix = 'Md';
     Object.keys(iview).forEach(key => {
+        if (components[key] || componentsMandao[key]) {
+            Vue.component(`${prefix}${key}`, iview[key]);
+        }
         Vue.component(key, iview[key]);
     });
 
-    Vue.prototype.$IVIEW = {
+    Vue.use(MdPrint);
+
+    Vue.prototype.$MDVIEW = Vue.prototype.$IVIEW = {
         size: opts.size || '',
         transfer: 'transfer' in opts ? opts.transfer : '',
         capture: 'capture' in opts ? opts.capture : true,
@@ -227,11 +258,22 @@ const install = function(Vue, opts = {}) {
         }
     };
 
-    Vue.prototype.$Loading = LoadingBar;
-    Vue.prototype.$Message = Message;
-    Vue.prototype.$Modal = Modal;
-    Vue.prototype.$Notice = Notice;
-    Vue.prototype.$Spin = Spin;
+    Vue.prototype.$MdLoading  = Vue.prototype.$Loading = LoadingBar;
+    Vue.prototype.$MdMessage  = Vue.prototype.$Message = Message;
+    Vue.prototype.$MdModal    = Vue.prototype.$Modal   = Modal;
+    Vue.prototype.$MdNotice   = Vue.prototype.$Notice  = Notice;
+    Vue.prototype.$MdSpin     = Vue.prototype.$Spin    = Spin;
+
+    /**
+     * mandao extend directives
+     */
+    Object.keys(directives).forEach(key => {
+        Vue.directive(key, directives[key]);
+    });
+
+    opts.iconfonts && opts.iconfonts.forEach(elem =>{
+        loadCss(elem);
+    });
 };
 
 // auto install
@@ -246,7 +288,8 @@ const API = {
     install,
     Circle,
     Switch,
-    ...components
+    ...components,
+    ...componentsMandao
 };
 
 API.lang = (code) => {
