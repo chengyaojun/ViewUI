@@ -63,7 +63,7 @@ export default {
     },
     data () {
         return {
-            prefix: 'vue-scroller-bars',
+            prefix: 'scroller-bars',
             scrollOffsetX: 0,
             scrollOffsetY: 0,
             contentSize: {

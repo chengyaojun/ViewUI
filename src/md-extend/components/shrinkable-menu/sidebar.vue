@@ -183,15 +183,3 @@
     };
 </script>
 
-<style lang="less">
-  /*@import "./styles/sidebar.less";*/
-  /*.sidebar-menu-con-footer__has {*/
-  /*    height: calc(~"100% - 47px");;*/
-  /*}*/
-  /*.sidebar-menu-con-footer__none {*/
-  /*    height: calc(~"100%");;*/
-  /*}*/
-  /*  .shrinkable-menu {
-        background-color: #fafafa;
-    }*/
-</style>
