@@ -164,6 +164,8 @@ const componentsMandao = {
     Btn: Button,
     BtnGroup: Button.Group,
     Icon,
+    Circle,
+    Switch
 };
 
 const iview = {
