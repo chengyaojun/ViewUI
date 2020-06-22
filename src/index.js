@@ -164,8 +164,6 @@ const componentsMandao = {
     Btn: Button,
     BtnGroup: Button.Group,
     Icon,
-    Circle,
-    Switch
 };
 
 const iview = {
@@ -186,6 +184,8 @@ const iview = {
     iSwitch: Switch,
     iTable: Table,
     iTime: Time,
+    MdSwitch: Switch,
+    MdCircle: Circle,
 };
 
 const install = function(Vue, opts = {}) {
