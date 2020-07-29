@@ -23,4 +23,10 @@ gulp.task('fonts', function () {
         .pipe(gulp.dest('../dist/styles/fonts'));
 });
 
-gulp.task('default', ['css', 'fonts']);
+// 拷贝JSON数据文件
+gulp.task('data', function () {
+    gulp.src('../src/md-extend/data/china_regions/*.*')
+        .pipe(gulp.dest('../dist/data/china_regions/'));
+});
+
+gulp.task('default', ['css', 'fonts', 'data']);

@@ -1,0 +1,51 @@
+@grid-prefix-cls: ~'@{css-prefix-md}grid';
+
+.@{grid-prefix-cls} {
+  height: inherit;
+  &:after {
+    content: "";
+    display: block;
+    clear: both
+  }
+
+  &-item {
+    position: relative;
+    float: left;
+    width: 33.33%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 0;
+    transition: box-shadow .2s ease-in-out;
+    &-main {
+      padding: 24px
+    }
+  }
+
+  &-border {
+    .@{grid-prefix-cls}-item {
+      box-shadow: 1px 0 0 0 #e8eaec,0 1px 0 0 #e8eaec,1px 1px 0 0 #e8eaec,inset 1px 0 0 0 #e8eaec,inset 0 1px 0 0 #e8eaec
+    }
+  }
+
+  &-hover {
+    .@{grid-prefix-cls}-item {
+      &:hover {
+        z-index: 1;
+        box-shadow: 0 1px 6px rgba(0,0,0,.2)
+      }
+    }
+  }
+
+  &-center {
+    .@{grid-prefix-cls}-item {
+      &-main {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center
+      }
+    }
+  }
+}

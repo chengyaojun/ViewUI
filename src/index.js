@@ -72,6 +72,11 @@ import Icon from './md-extend/components/icon';
 import CanEditTable from './md-extend/components/table/can-edit';
 import CanEditTableV2 from './md-extend/components/table/v2/can-edit-v2';
 
+import Grid from './md-extend/components/grid/grid';
+import City from './md-extend/components/city';
+import Result from './md-extend/components/result';
+import CountDown from './md-extend/components/count-down';
+
 const components = {
     Affix,
     Alert,
@@ -164,6 +169,10 @@ const componentsMandao = {
     Btn: Button,
     BtnGroup: Button.Group,
     Icon,
+    Grid,
+    City,
+    Result,
+    CountDown
 };
 
 const iview = {

@@ -1,0 +1,45 @@
+
+/*!
+ * Bootstrap Utilities v5.0.0-alpha1 (https://getbootstrap.com/)
+ * Copyright 2011-2020 The Bootstrap Authors
+ * Copyright 2011-2020 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+@import "_border";
+@import "_colors";
+@import "_display";
+@import "_interactions";
+@import "_layout";
+@import "_shadows";
+@import "_sizes";
+@import "_spacing";
+@import "_text";
+
+
+/**
+ * 解决inline-block间隙问题
+ */
+.space {
+  letter-spacing: -6px;
+}
+.space span, .span a {
+  letter-spacing: 0;
+}
+
+/**
+ * 禁止点击
+ */
+.disabled-click {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
+}
+
+/**
+ * 清楚浮动
+ */
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: "";
+}

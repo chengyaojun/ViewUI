@@ -1,0 +1,89 @@
+@grid-number: 24;
+
+.m-auto {
+  margin: auto !important;
+}
+
+.mt-auto {
+  margin-top: auto !important;
+}
+
+.mb-auto {
+  margin-bottom: auto !important;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+
+.mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.make-margin(@counter) when (@counter >= 0) {
+  @name:(2 * @counter);
+  .m-@{name} {
+    margin: (2px * @counter) !important;
+  }
+  .mt-@{name} {
+    margin-top: (2px * @counter) !important;
+  }
+  .mb-@{name} {
+    margin-bottom: (2px * @counter) !important;
+  }
+  .ml-@{name} {
+    margin-left: (2px * @counter) !important;
+  }
+  .mr-@{name} {
+    margin-right: (2px * @counter) !important;
+  }
+  .mx-@{name} {
+    margin-right: (2px * @counter) !important;
+    margin-left: (2px * @counter) !important;
+  }
+
+  .my-@{name} {
+    margin-top: (2px * @counter) !important;
+    margin-bottom: (2px * @counter) !important;
+  }
+  .make-margin((@counter - 1));
+}
+
+
+.make-padding(@counter) when (@counter >= 0) {
+  @name:(2 * @counter);
+  .p-@{name} {
+    padding: (2px * @counter) !important;
+  }
+  .pt-@{name} {
+    padding-top: (2px * @counter) !important;
+  }
+  .pb-@{name} {
+    padding-bottom: (2px * @counter) !important;
+  }
+  .pl-@{name} {
+    padding-left: (2px * @counter) !important;
+  }
+  .pr-@{name} {
+    padding-right: (2px * @counter) !important;
+  }
+  .px-@{name} {
+    padding-right: (2px * @counter) !important;
+    padding-left: (2px * @counter) !important;
+  }
+
+  .py-@{name} {
+    padding-top: (2px * @counter) !important;
+    padding-bottom: (2px * @counter) !important;
+  }
+  .make-padding((@counter - 1));
+}
+
+.make-padding(@grid-number);
+.make-margin(@grid-number);
+
