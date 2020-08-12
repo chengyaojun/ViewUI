@@ -76,6 +76,7 @@ import Grid from './md-extend/components/grid/grid';
 import City from './md-extend/components/city';
 import Result from './md-extend/components/result';
 import CountDown from './md-extend/components/count-down';
+import CountUp from './md-extend/components/count-up';
 
 const components = {
     Affix,
@@ -172,7 +173,8 @@ const componentsMandao = {
     Grid,
     City,
     Result,
-    CountDown
+    CountDown,
+    CountUp
 };
 
 const iview = {

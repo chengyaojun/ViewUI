@@ -21,7 +21,9 @@
       </div>
       <div :class="`${prefixCls}__footer`">
         <div :class="`${prefixCls}__actions`" >
-          <Button v-for="(item, index) in actions"  :key="index" @click="handleClickBtnItem(item, index)" :type="buttonType(index)" :class="classesBtn" >{{item}}</Button>
+          <slot name="footer">
+            <Button v-for="(item, index) in actions"  :key="index" @click="handleClickBtnItem(item, index)" :type="buttonType(index)" :class="classesBtn" >{{item}}</Button>
+          </slot>
         </div>
       </div>
     </div>

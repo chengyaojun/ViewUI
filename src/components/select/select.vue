@@ -97,7 +97,8 @@
     import FunctionalOptions from './functional-options.vue';
 
     const prefixCls = 'ivu-select';
-    const optionRegexp = /^i-option$|^Option$/i;
+    // const optionRegexp = /^i-option$|^Option$/i;
+    const optionRegexp = /^i-option$|^Option$|^md-option$|^MdOption$/i;
     const optionGroupRegexp = /option-?group/i;
 
     const findChild = (instance, checkFn) => {
@@ -283,7 +284,6 @@
         },
         mounted(){
             this.$on('on-select-selected', this.onOptionClick);
-
             // set the initial values if there are any
             if (!this.remote && this.selectOptions.length > 0){
                 this.values = this.getInitialValue().map(value => {
@@ -774,14 +774,7 @@
 
                 if (value === '') this.values = [];
                 else if (checkValuesNotEqual(value,publicValue,values)) {
-                    // 修复option改为md-option是下拉无法选中的问题
-                    this.$nextTick(() => {
-                        let filterValue = getInitialValue().map(getOptionData).filter(Boolean);
-                        if (filterValue.length>0) {
-                            this.values = filterValue;
-                        }
-                    });
-                    // this.$nextTick(() => this.values = getInitialValue().map(getOptionData).filter(Boolean));
+                    this.$nextTick(() => this.values = getInitialValue().map(getOptionData).filter(Boolean));
                     if (!this.multiple) this.dispatch('FormItem', 'on-form-change', this.publicValue);
                 }
             },
