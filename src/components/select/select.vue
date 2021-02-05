@@ -103,6 +103,10 @@
     import FunctionalOptions from './functional-options.vue';
 
     const prefixCls = 'ivu-select';
+    /*
+     * mandao extend
+     * 修复添加md-前缀时Option下拉的问题
+     */
     // const optionRegexp = /^i-option$|^Option$/i;
     const optionRegexp = /^i-option$|^Option$|^md-option$|^MdOption$/i;
     const optionGroupRegexp = /option-?group/i;
