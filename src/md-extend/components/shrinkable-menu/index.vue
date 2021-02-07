@@ -10,6 +10,7 @@
         :icon-color="iconColor"
         :show-divider="showDivider"
         :cell-height="cellHeight"
+        :id-route-map="idRouteMap"
         @on-change="handleChange"
     ></sidebar-menu>
     <sidebar-menu-shrink
@@ -18,6 +19,8 @@
         :menu-list="menuList"
         :icon-size="iconSize"
         :icon-color="iconColor"
+        :open-names="openNames"
+        :id-route-map="idRouteMap"
         @on-change="handleChange"
     ></sidebar-menu-shrink>
   </div>
@@ -55,6 +58,9 @@
                 type: Array,
                 required: true
             },
+            idRouteMap: {
+              type: Object,
+            },
             theme: {
                 type: String,
                 default: 'dark',
@@ -83,8 +89,11 @@
             }
         },
         methods: {
-            handleChange(name) {
 
+            handleChange(name) {
+                // const routes = this.$router.options.routes || [];
+                // const paths = routes.map(elem=> elem.path);
+                // if (paths.indexOf(name) < 0) return;
                 let willpush = true;
                 if (this.beforePush !== undefined) {
                     if (!this.beforePush(name)) {

@@ -10,11 +10,12 @@
             :class="themeClassName"
             class="shrinkable-menu"
             :before-push="beforePush"
-            :open-names="openedSubs"
+            :open-names="getOpenedSubs()"
             :icon-size="iconSize"
             :icon-color="iconColor"
             :show-divider="showDivider"
             :cell-height="cellHeight"
+            :id-route-map="idRouteMap"
             :menu-list="menuList">
           <!--<div slot="top" class="logo-con">-->
           <!--<img v-show="!shrink"  src="@/assets/logo.png" key="max-logo" />-->
@@ -74,10 +75,6 @@
                 type: Boolean,
                 default: true
             },
-            openedSubs: {
-                type: Array | Object,
-                default: [],
-            },
             showDivider: {
                 type: Boolean,
                 default: false,
@@ -95,6 +92,8 @@
                 menuList: [],
                 shrink: false,
                 openedSubmenuArr: [],
+                menusMap:{},
+                idRouteMap: {},
             };
         },
         computed: {
@@ -111,25 +110,54 @@
             },
         },
         methods: {
+            getOpenedSubs() {
+                const route = this.$route.path;
+                const _id = this.menusMap[route];
+                if (!_id) return [];
+                const split = '.';
+                const last = _id.lastIndexOf(split);
+                let start = 0;
+                let end = 0;
+                let subs = [];
+                while (true) {
+                    if (start>=last) break;
+                    end = _id.indexOf(split, start);
+                    const v = _id.substring(0, end)
+                    start = end + 1;
+                    subs.push(v);
+                }
+
+                subs.push(_id);
+                return subs;
+            },
+            normalizedMenusList(menus) {
+                let subs = menus;
+                const genId = (parent, current) => {
+                    const arr = [parent, current].filter(elem=>{
+                      return elem !== undefined && elem !== null;
+                    });
+                    return arr.join('.');
+                }
+                let findSubs = (data, parentId) =>{
+                    data.forEach((e, index) => {
+                        e._id = genId(parentId, index);
+
+                        if (!e.childList || e.childList.length <= 0) {
+                            e.icon = e.icon || 'logo-buffer';
+                            if (e.route) {
+                              this.menusMap[e.route] = e._id
+                              this.idRouteMap[e._id] = e;
+                            };
+                        } else {
+                            findSubs(e.childList, e._id);
+                        }
+                    });
+                }
+                findSubs(subs)
+                return subs;
+            },
             getMenusList() {
-                this.menuList = this.menus;//_menuList['result'];
-                // this.openedSubmenuArr = this.menus.map(elem=>{
-                //   return elem.name;
-                // })
-                // this.menuList = [_menuList[2]];
-                // this.$md.dispatch('personal_menus', {userId:'4'}).then(data=>{
-                //   let list = data['result'][1];
-                //
-                //   let childList = list['childList'];
-                //   this.menuList = [list];
-                //   this.openedSubmenuArr = this.menuList .map(elem=>{
-                //     return elem.name;
-                //   })
-                //   // this.openedSubmenuArr = this.menuList;
-                //   console.log(this.menuList);
-                //   // this.menuList = data['result']
-                //   // console.log( data['result'][1]);
-                // })
+                this.menuList = this.normalizedMenusList(this.menus);//_menuList['result'];
             },
             toggleClick() {
                 this.shrink = !this.shrink;

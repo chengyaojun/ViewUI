@@ -447,9 +447,9 @@ export default {
           'permDTOList': [],
           'childList': [{
             'id': 721,
-            'code': 'md-view.code..multi-level-menus..multi-level-menus221',
+            'code': 'md-view.code..multi-level-menus..multi-level-menus22',
             'name': 'Level-2-2-1',
-            'level': 'multi-level-menus221',
+            'level': 'multi-level-menus22',
             'icon': 'md-funnel',
             'route': '',
             'permDTOList': [],
